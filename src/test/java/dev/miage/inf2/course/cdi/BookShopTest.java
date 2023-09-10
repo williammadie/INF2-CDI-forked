@@ -1,10 +1,14 @@
 package dev.miage.inf2.course.cdi;
 
 import dev.miage.inf2.course.cdi.domain.BookShop;
+import dev.miage.inf2.course.cdi.domain.Shop;
 import dev.miage.inf2.course.cdi.exception.OutOfStockException;
 import dev.miage.inf2.course.cdi.model.Book;
 import dev.miage.inf2.course.cdi.model.Customer;
 import info.schnatterer.mobynamesgenerator.MobyNamesGenerator;
+import io.quarkus.test.junit.QuarkusTest;
+import jakarta.enterprise.context.Dependent;
+import jakarta.inject.Inject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +20,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@QuarkusTest
 class BookShopTest {
 
 
@@ -26,16 +31,32 @@ class BookShopTest {
         customer = new Customer(MobyNamesGenerator.getRandomName(), MobyNamesGenerator.getRandomName(), "toto@miage.dev", "+333895457896");
     }
 
+    @Inject
+    BookShop bookShop;
+
+
+    @BeforeEach
+    void setUp() {
+        try {
+            while (this.bookShop.sell(customer) != null) {
+                // keep selling what we have
+            }
+        } catch (OutOfStockException oos) {
+            // ok, the bookshop is empty now
+        }
+
+    }
+
     @Test
     void sellAnStockTest() throws InterruptedException {
 
         var bookCount = 10;
         var copyPerBook = 10;
         var salesCount = 50;
-        BookShop bookShop = new BookShop();
-        ExecutorService service = Executors.newFixedThreadPool(12);
-        getStokingRunnable(bookShop, bookCount, copyPerBook).parallel().forEach(Runnable::run);
-        getSellingRunnable(bookShop, salesCount).parallel().forEach(Runnable::run);
+
+
+        getStokingRunnable(bookShop, bookCount, copyPerBook).forEach(Runnable::run);
+        getSellingRunnable(bookShop, salesCount).forEach(Runnable::run);
 
         assertEquals(bookCount * copyPerBook - salesCount, bookShop.countBooks());
 
@@ -45,7 +66,7 @@ class BookShopTest {
 
     @Test
     void outOfStock() throws InterruptedException {
-        BookShop bookShop = new BookShop();
+
         ExecutorService service = Executors.newFixedThreadPool(12);
         getStokingRunnable(bookShop, 10, 10).parallel().forEach(Runnable::run);
 
@@ -55,6 +76,7 @@ class BookShopTest {
 
         } catch (OutOfStockException rte) {
             //for the win
+
         }
 
     }
@@ -69,16 +91,14 @@ class BookShopTest {
         return String.format("%03d-%01d-%02d-%06d-%01d", random.nextInt(1000), random.nextInt(10), random.nextInt(100), random.nextInt(1000000), random.nextInt(10));
     }
 
-    private static Stream<Runnable> getSellingRunnable(BookShop bookShop, int bookCount) {
-        return IntStream.range(0, bookCount).mapToObj(i -> () -> {
+    private static Stream<Runnable> getSellingRunnable(Shop<Book> bookShop, int bookCount) {
 
-            bookShop.sell(customer);
+        return IntStream.range(0, bookCount).mapToObj(i -> () -> bookShop.sell(customer));
 
-
-        });
     }
 
-    private static Stream<Runnable> getStokingRunnable(BookShop bookShop, int bookCount, int copyPerBookCount) {
+
+    private static Stream<Runnable> getStokingRunnable(Shop<Book> bookShop, int bookCount, int copyPerBookCount) {
         return IntStream.range(0, bookCount).mapToObj(i -> {
             var randomBook = getRandomBook();
             return IntStream.range(0, copyPerBookCount).mapToObj(ii -> (Runnable) () -> {

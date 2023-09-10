@@ -6,20 +6,25 @@ import dev.miage.inf2.course.cdi.model.Customer;
 import dev.miage.inf2.course.cdi.model.Receipt;
 import dev.miage.inf2.course.cdi.service.InventoryService;
 import dev.miage.inf2.course.cdi.service.ReceiptTransmissionService;
-import dev.miage.inf2.course.cdi.service.impl.InMemoryInventoryService;
-import dev.miage.inf2.course.cdi.service.impl.StringReceiptTransmissionService;
+import jakarta.enterprise.context.ApplicationScoped;
+
+import jakarta.enterprise.context.Dependent;
+import jakarta.enterprise.inject.Default;
+import jakarta.inject.Inject;
 
 import java.util.Random;
 
+@Dependent
 public class BookShop implements Shop<Book> {
 
-    private InventoryService<Book> inventoryService;
-    private ReceiptTransmissionService<Book> receiptTransmissionService;
+    @Inject
+    InventoryService<Book> inventoryService;
+    @Inject
+    ReceiptTransmissionService<Book> receiptTransmissionService;
 
     public BookShop() {
-        this.inventoryService = new InMemoryInventoryService();
-        this.receiptTransmissionService = new StringReceiptTransmissionService();
     }
+
 
     public long countBooks() {
         return this.inventoryService.countItemsInInventory();

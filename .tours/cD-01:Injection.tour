@@ -1,0 +1,32 @@
+{
+  "id": "5194ceca-49f8-4d7b-94bd-d7abf4dcf455",
+  "tourFile": "cD-01:Injection.tour",
+  "title": "CD-01:Injection",
+  "description": "A New Tour",
+  "steps": [
+    {
+      "title": "BookShop.java:19",
+      "description": "Nous voyons ici que les deux attributs ne sont plus initialisés dans le constructeur.\n\nIls sont initialisés par le contexte et injecté à l\u0027intérieur de la classe, là où les attributs sont annotés avec @Inject",
+      "file": "BookShop.java",
+      "line": 19
+    },
+    {
+      "title": "InventoryService.java:3",
+      "description": "La Déclaration des interfaces reste inchangée",
+      "file": "InventoryService.java",
+      "line": 3
+    },
+    {
+      "title": "InMemoryInventoryService.java:19",
+      "description": "En revenche, on voit ici d\u0027une annotation @Dependent a été ajoutée à la classe.\nIl s\u0027agit là d\u0027un scope (une portée d\u0027injection) qui précise que dès qu\u0027on croise un @Inject, une nouvelle instance différente est injectée.\n\n**il y a d\u0027autres scopes, plus utiles, que nous verrons tout à l\u0027heure**",
+      "file": "InMemoryInventoryService.java",
+      "line": 19
+    },
+    {
+      "title": "BookShopTest.java:35",
+      "description": "Dans les tests unitaires, on voit maintenant que le Bookshop est lui aussi Injecté. \nLe contexte de Junit n\u0027est pas suffisant pour réaliser l\u0027injection de dépendance seul.\nOn aurait pu:\n* créer notre propre contexte d\u0027injection en utilisant l\u0027implémentation de référence Weld\n* Permettre à Junit de faire la détection des beans seul, avec une extension\n\n Par soucis de simplicité, on utilise le framework Quarkus et son annotation @QuarkusTest. C\u0027est aussi lui qui construit la structure de notre programme.",
+      "file": "BookShopTest.java",
+      "line": 35
+    }
+  ]
+}
