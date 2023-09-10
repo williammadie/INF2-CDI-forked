@@ -1,0 +1,32 @@
+{
+  "id": "a22ab43e-9418-4681-b02c-13a3f1b76ccc",
+  "tourFile": "cD-02:InjectionPoints.tour",
+  "title": "CD-02: Injection Points",
+  "description": "A New Tour",
+  "steps": [
+    {
+      "title": "SecretariatMiage.java:5",
+      "description": "Pour l\u0027instant, nous n\u0027avons montrer que l\u0027utilisation de l\u0027annotation @Inject sur des attributs. Ce n\u0027est pas la seule façon d\u0027injecter des objets à partir du contexte.",
+      "file": "SecretariatMiage.java",
+      "line": 5
+    },
+    {
+      "title": "SecretariatMiage.java:26",
+      "description": "On peut également faire de l\u0027injection par constructeur. \nIl suffit pour cela d\u0027annoter le constructeur avec @Inject et de passer les paramètres à injecter.\nNotez que cela ne constitue en rien une violation des principes des *Bean* (j\u0027avais dit précédemment qu\u0027ils devaient avoir un constructeur sans arguement).\nEn réalité, la limitation se précise en \"sans argument non-injectable\".\nL\u0027injection par constructeur est la plus puissante, car elle seule permet d\u0027obtenir des attributs finaux.",
+      "file": "SecretariatMiage.java",
+      "line": 26
+    },
+    {
+      "title": "SecretariatMiage.java:18",
+      "description": "Il est également possible d\u0027utiliser l\u0027injection par setter.\nLe contexte appellera alors, après la construction de l\u0027objet, tous les setters annotés par @Inject avec l\u0027instance attendue.",
+      "file": "SecretariatMiage.java",
+      "line": 18
+    },
+    {
+      "title": "SecretariatMiage.java:5",
+      "description": "Enfin, on peut utiliser les 3 types de points d\u0027injection simultanement (attributs, constructeurs et setter).\nIl faut simplement veiller à ce que:\n- un même attribut ne peut être injecté que d\u0027une seule manière (on ne peut pas cumuler injection par attribut avec l\u0027injection par constructeur par ex.)\n- tous les attributs du constructeur doivent être injectable (si un attribut n\u0027est pas injectable, l\u0027initialisation de l\u0027objet échouera)\n- il faut rester clair dans sa stratégie d\u0027injection, sinon on s\u0027y perd vite!",
+      "file": "SecretariatMiage.java",
+      "line": 5
+    }
+  ]
+}
