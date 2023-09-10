@@ -11,8 +11,7 @@ import java.util.Properties;
 
 public class ReceiptTransmissionServiceMail<T> implements ReceiptTransmissionService<T> {
 
-    @ConfigProperty
-    @Override
+        @Override
     public void sendReceipt(Customer customer, Receipt<T> receipt) {
         try {
             Properties prop = new Properties();

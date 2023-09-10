@@ -1,0 +1,32 @@
+{
+  "id": "dcfab3b6-447d-41c6-914f-7d0317823dfe",
+  "tourFile": "cDI-00:Motivations.tour",
+  "title": "CDI-00: motivations",
+  "description": "A New Tour",
+  "steps": [
+    {
+      "title": "Shop.java:15",
+      "description": "Cette classe est utilisée pour représenter une boutique qui vend des Objets de type `T`",
+      "file": "Shop.java",
+      "line": 15
+    },
+    {
+      "title": "BookShop.java:13",
+      "description": "Cette classe est l\u0027implémentation de la boutique pour des livres, elle dépend de 2 autres classes: \n* `InMemoryInventoryService` qui gère l\u0027inventaire des livres. Elle permet de stocker et déstoker les livres\n* `StringReceiptTransmissionService` qui gère la communication de son reçu au client\n\nLa création des deux instances des attributs est faite dans le constructeur de la classe `Bookshop`.\n\nLe problème est que les deux services concernés sont fortements couplés avec la classe BookShop, il est impossible de changer les services en fonction du contexte d\u0027exécution (e.g., tests unitaires, SMS ou mail pour la communication du reçu, en mémoire ou en base de données pour la gestion de l\u0027inventaire)",
+      "file": "BookShop.java",
+      "line": 13
+    },
+    {
+      "title": "BookShopTest.java:19",
+      "description": "# Problème\n\nLes tests unitaires développés pour la classe Bookshop nécessite l\u0027utilisation pour cette classe d\u0027instances particulières des deux services qui la compose.\nIl serait intéressant de distinguer les contextes d\u0027exécution\n\n* Je suis dans les tests unitaires\n* Je suis sur l\u0027environnement de test\n* Je suis sur l\u0027environnement d\u0027exécution",
+      "file": "BookShopTest.java",
+      "line": 19
+    },
+    {
+      "title": "ReceiptTransmissionServiceMail.java:12",
+      "description": "# ReceiptTransmissionServiceMail\n\nCette classe permet la transmission du reçu par mail. \n\n## Question:\n\nTrouvez les autres implémentations de l\u0027interface implémentée par cette classe",
+      "file": "ReceiptTransmissionServiceMail.java",
+      "line": 12
+    }
+  ]
+}
