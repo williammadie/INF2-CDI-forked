@@ -6,7 +6,9 @@ import com.twilio.rest.api.v2010.account.Message;
 import dev.miage.inf2.course.cdi.model.Customer;
 import dev.miage.inf2.course.cdi.model.Receipt;
 import dev.miage.inf2.course.cdi.service.ReceiptTransmissionService;
+import jakarta.enterprise.context.Dependent;
 
+@Dependent
 public class ReceiptTransmissionServiceSMS<T> implements ReceiptTransmissionService<T> {
 
 

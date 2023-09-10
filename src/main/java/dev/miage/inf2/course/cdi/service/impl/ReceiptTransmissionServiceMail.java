@@ -3,12 +3,14 @@ package dev.miage.inf2.course.cdi.service.impl;
 import dev.miage.inf2.course.cdi.model.Customer;
 import dev.miage.inf2.course.cdi.model.Receipt;
 import dev.miage.inf2.course.cdi.service.ReceiptTransmissionService;
+import jakarta.enterprise.context.Dependent;
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import java.util.Properties;
 
+@Dependent
 public class ReceiptTransmissionServiceMail<T> implements ReceiptTransmissionService<T> {
 
         @Override

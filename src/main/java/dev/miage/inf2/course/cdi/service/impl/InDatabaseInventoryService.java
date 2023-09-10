@@ -1,7 +1,9 @@
 package dev.miage.inf2.course.cdi.service.impl;
 
 import dev.miage.inf2.course.cdi.service.InventoryService;
+import jakarta.enterprise.context.Dependent;
 
+@Dependent
 public class InDatabaseInventoryService<T> implements InventoryService<T> {
     @Override
     public void addToInventory(T t) {

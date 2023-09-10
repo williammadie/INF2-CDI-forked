@@ -7,6 +7,7 @@ import jakarta.annotation.ManagedBean;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Default;
+import jakarta.inject.Named;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -16,6 +17,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.LinkedBlockingDeque;
 
 @Dependent
+@Named("InventoryGoodForBookStore")
 public class InMemoryInventoryService implements InventoryService<Book> {
 
     ConcurrentMap<String, BlockingDeque<Book>> inventory = new ConcurrentHashMap<>();

@@ -11,6 +11,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Default;
 import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import java.util.Random;
 
@@ -18,9 +19,11 @@ import java.util.Random;
 public class BookShop implements Shop<Book> {
 
     @Inject
-    InventoryService<Book> inventoryService;
+    @Named("InventoryGoodForBookStore")
+    protected InventoryService<Book> inventoryService;
     @Inject
-    ReceiptTransmissionService<Book> receiptTransmissionService;
+    @Named("ReceiptGoodForBookStore")
+    protected ReceiptTransmissionService<Book> receiptTransmissionService;
 
     public BookShop() {
     }

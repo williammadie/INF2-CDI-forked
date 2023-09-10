@@ -1,0 +1,60 @@
+{
+  "id": "7a7b52a6-dd71-4e9b-9e0b-3a2124b250de",
+  "tourFile": "cDI-03:DiscriminerLesBeans.tour",
+  "title": "CDI-03: Discriminer les beans",
+  "description": "A New Tour",
+  "steps": [
+    {
+      "title": "StringReceiptTransmissionService.java:11",
+      "description": "Ici, on souhaite que tous les services correspondants aux interfaces `ReceiptTransmissionService` et `InventoryService` soient des beans.\nLe problème avec cette façon de faire et que lors de l\u0027injection d\u0027instance de `InventoryService` et `ReceiptTransmissionService` une ambiguité va se produire:\n\nSi CDI tombe sur \n```java \n@Inject  InventoryService inventoryService\n```\n\nque doit-il injecter? `InMemoryInventoryService` ou `DatabaseInventoryService` ? On aura au mieux un erreur lors de build (grace à Quarkus) ou au pire lors de l\u0027exécution.",
+      "file": "StringReceiptTransmissionService.java",
+      "line": 11
+    },
+    {
+      "title": "StringReceiptTransmissionService.java:13",
+      "description": "On ajoute ici un nom au Bean. Ce nom va permettre de le discriminer des autres beans de la même hiérarchie de classe.\nOn ajoute l\u0027annotation @Named(\"InventoryGoodForBookStore\") à la définition de la classe et au point d\u0027injection",
+      "file": "StringReceiptTransmissionService.java",
+      "line": 13
+    },
+    {
+      "title": "BookShop.java:22",
+      "description": "Ici, on voit que le point d\u0027injection à l\u0027annotation @Named(\"InventoryGoodForBookStore\") est ajouté à l\u0027annotation @Inject",
+      "file": "BookShop.java",
+      "line": 22
+    },
+    {
+      "title": "A Description-Only Step",
+      "description": "@Named est simple d\u0027utilisation, mais pose 2 problèmes:\n* il est très facile de faire des fautes de frappes et très difficile de faire du refactoring sur les \"string\" dans du code Java\n* Si vous mettez la même annotation @Named  sur des beans de types différents, CDI ne sera pas capable de lever l\u0027ambiguité (ce n\u0027est pas très malin de sa part)\n\nUne autre solution existe: créer vos propres annotations discriminantes: les @Qualifier"
+    },
+    {
+      "title": "ForBookStore.java:13",
+      "description": "Ici, une annotation Qualifier est définie et doit être posée sur toutes les implémentations utilisable sur les tests unitaires.",
+      "file": "ForBookStore.java",
+      "line": 13
+    },
+    {
+      "title": "BookShop.java:22",
+      "description": "Remplacez les @Named par des @ForBookStore pour cette classe",
+      "file": "BookShop.java",
+      "line": 22
+    },
+    {
+      "title": "InMemoryInventoryService.java:20",
+      "description": "Remplacez l\u0027annotation @Named par l\u0027annotation @ForBookStore",
+      "file": "InMemoryInventoryService.java",
+      "line": 20
+    },
+    {
+      "title": "StringReceiptTransmissionService.java:13",
+      "description": "Remplacez l\u0027annotation @Named par l\u0027application @ForBookStore",
+      "file": "StringReceiptTransmissionService.java",
+      "line": 13
+    },
+    {
+      "title": "BookShopTest.java:39",
+      "description": "LEs tests unitaires devraient s\u0027exécuter à nouveau",
+      "file": "BookShopTest.java",
+      "line": 39
+    }
+  ]
+}

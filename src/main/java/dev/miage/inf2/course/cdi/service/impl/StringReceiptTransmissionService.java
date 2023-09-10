@@ -7,8 +7,10 @@ import dev.miage.inf2.course.cdi.service.ReceiptTransmissionService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Default;
+import jakarta.inject.Named;
 
 @Dependent
+@Named("ReceiptGoodForBookStore")
 public class StringReceiptTransmissionService implements ReceiptTransmissionService<Book> {
 
     private static final StringBuilder stringBuilder = new StringBuilder();
