@@ -1,0 +1,32 @@
+{
+  "id": "b2c5b57d-2b1a-404f-9a70-80df0c3d331a",
+  "tourFile": "cDI-04-Scopes.tour",
+  "title": "CDI-04-Scopes",
+  "description": "A New Tour",
+  "steps": [
+    {
+      "title": "BooksEndpoint.java:23",
+      "description": "On a rajouté ici une API Rest. Lancez l\u0027application avec Quarkus et allez sur http://localhost:8080/book/all",
+      "file": "BooksEndpoint.java",
+      "line": 23
+    },
+    {
+      "title": "BooksEndpoint.java:27",
+      "description": "Notre API Rest est un bean, et il est injecté avec un bookstore. \nL\u0027API permet d\u0027ajouter un livre et de lister tous les livres",
+      "file": "BooksEndpoint.java",
+      "line": 27
+    },
+    {
+      "title": "BooksEndpoint.java:22",
+      "description": "Il y a un problèmes: les livres de s\u0027ajoutent pas.\nLa raison est que le scope de l\u0027API est @Dependent, ce qui indique qu\u0027un nouvel objet est crée à chaque requète.\nLe bean du bookstore est également @Dependent.",
+      "file": "BooksEndpoint.java",
+      "line": 22
+    },
+    {
+      "title": "BookShop.java:19",
+      "description": "Changez le scope du Bookstore à @ApplicationScoped Il y aura 1 seul Bookstore pour toute l\u0027application et la même instance sera injectée pour toutes les nouvelles instances de l\u0027API",
+      "file": "BookShop.java",
+      "line": 19
+    }
+  ]
+}

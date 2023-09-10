@@ -13,6 +13,7 @@ import jakarta.enterprise.inject.Default;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
+import java.util.Collection;
 import java.util.Random;
 
 @Dependent
@@ -46,5 +47,10 @@ public class BookShop implements Shop<Book> {
     @Override
     public void stock(Book book) {
         this.inventoryService.addToInventory(book);
+    }
+
+    @Override
+    public Collection<Book> getAllItems() {
+        return this.inventoryService.listAllItems();
     }
 }

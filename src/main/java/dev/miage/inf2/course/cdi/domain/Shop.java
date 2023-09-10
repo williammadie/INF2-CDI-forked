@@ -1,7 +1,10 @@
 package dev.miage.inf2.course.cdi.domain;
 
 import dev.miage.inf2.course.cdi.exception.OutOfStockException;
+import dev.miage.inf2.course.cdi.model.Book;
 import dev.miage.inf2.course.cdi.model.Customer;
+
+import java.util.Collection;
 
 /**
  * An interface representing a Shop that sells and stock things
@@ -26,4 +29,6 @@ public interface Shop<T> {
      */
 
     void stock(T t);
+
+    Collection<T> getAllItems();
 }

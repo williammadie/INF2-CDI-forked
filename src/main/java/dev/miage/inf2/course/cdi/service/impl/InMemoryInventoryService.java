@@ -9,12 +9,15 @@ import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.inject.Default;
 import jakarta.inject.Named;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.LinkedBlockingDeque;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Dependent
 @Named("InventoryGoodForBookStore")
@@ -51,5 +54,14 @@ public class InMemoryInventoryService implements InventoryService<Book> {
     @Override
     public long countItemsInInventory() {
         return inventory.entrySet().stream().mapToInt(e -> e.getValue().size()).sum();
+    }
+
+    @Override
+    public Collection<Book> listAllItems() {
+        return this.inventory.values().stream().flatMap(c -> c.stream()).collect(Collectors.toSet());
+    }
+
+    public void deleteBook(String isbn) {
+        this.inventory.remove(isbn);
     }
 }

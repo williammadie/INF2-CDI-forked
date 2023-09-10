@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+<body>
+<h1>new Book</h1>
+
+<form action="/book" method="POST">
+    <div class="form-group">
+        <label for="author">Author</label>
+        <input type="text" class="form-control" name="author" id="author" placeholder="Nom de l'auteur">
+    </div>
+    <div class="form-group">
+        <label for="title">Titre</label>
+        <input type="text" class="form-control" id="title" name="title" placeholder="Titre de l'oeuvre">
+    </div>
+
+    <div class="form-group">
+        <label for="isbn">isbn</label>
+        <input type="text" class="form-control" id="isbn" name="isbn" placeholder="987-2-3828-4563-9">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<a href="/book/all">list all books</a>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+</body>
+</html>
