@@ -2,6 +2,8 @@ package dev.miage.inf2.course.cdi.endpoint;
 
 import dev.miage.inf2.course.cdi.domain.BookShop;
 import dev.miage.inf2.course.cdi.model.Book;
+import dev.miage.inf2.course.cdi.model.Customer;
+import info.schnatterer.mobynamesgenerator.MobyNamesGenerator;
 import io.quarkus.qute.CheckedTemplate;
 import io.quarkus.qute.TemplateInstance;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -51,6 +53,14 @@ public class BooksEndpoint {
         } else {
             return Templates.booklist(List.of(book.get()));
         }
+    }
+
+    @Path("{isbn}")
+    @DELETE
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance buybook(@PathParam("isbn") String isbn) {
+        bookShop.sell(new Customer(MobyNamesGenerator.getRandomName(), MobyNamesGenerator.getRandomName(), "toto@miage.dev", "+3395387845"),isbn);
+        return Templates.booklist(bookShop.getAllItems());
     }
 
     @Path("form-new")

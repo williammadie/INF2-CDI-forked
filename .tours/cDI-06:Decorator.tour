@@ -1,0 +1,18 @@
+{
+  "id": "9906f075-f770-477d-8ec9-61cdd957e044",
+  "tourFile": "cDI-06:Decorator.tour",
+  "title": "CDI-06: Decorator",
+  "description": "A New Tour",
+  "steps": [
+    {
+      "title": "A Description-Only Step",
+      "description": "Avec le décorateur, on peut altérer la logique métier de façon dynamique sans avoir besoin d\u0027utiliser l\u0027héritage ni les design pattern OO"
+    },
+    {
+      "title": "RestockInventoryDecorator.java:18",
+      "description": "La classe décorator a une instance de la classe décorée (le delegate)\nIci, lorsqu\u0027on détecte un stock de livre \u003d 0 pour une référence, on recommande",
+      "file": "RestockInventoryDecorator.java",
+      "line": 18
+    }
+  ]
+}

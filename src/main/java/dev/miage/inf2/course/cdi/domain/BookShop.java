@@ -49,6 +49,11 @@ public class BookShop implements Shop<Book> {
     }
 
     @Override
+    public Book sell(Customer customer, String id) {
+        return this.inventoryService.takeFromInventory(id);
+    }
+
+    @Override
     public void stock(Book book) {
 
         this.inventoryService.addToInventory(book);

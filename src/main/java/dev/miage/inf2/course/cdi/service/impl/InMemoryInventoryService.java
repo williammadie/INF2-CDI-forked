@@ -19,7 +19,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-@Dependent
+@ApplicationScoped
 @Named("InventoryGoodForBookStore")
 public class InMemoryInventoryService implements InventoryService<Book> {
 
@@ -49,6 +49,11 @@ public class InMemoryInventoryService implements InventoryService<Book> {
         } catch (NoSuchElementException e) {
             throw new OutOfStockException("we don't have any book for you");
         }
+    }
+
+    @Override
+    public Book takeFromInventory(String id) {
+        return this.inventory.get(id).poll();
     }
 
     @Override

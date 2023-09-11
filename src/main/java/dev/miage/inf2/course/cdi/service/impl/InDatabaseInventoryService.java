@@ -20,6 +20,12 @@ public class InDatabaseInventoryService<T> implements InventoryService<T> {
     }
 
     @Override
+    public T takeFromInventory(String id) {
+        //SELECT + UPDATE
+        return null;
+    }
+
+    @Override
     public long countItemsInInventory() {
         // SELECT COUNT(*) FROM...
         return 0;
@@ -27,7 +33,7 @@ public class InDatabaseInventoryService<T> implements InventoryService<T> {
 
     @Override
     public Collection<T> listAllItems() {
-            //select * from
+        //select * from
 
         return Collections.EMPTY_LIST;
     }

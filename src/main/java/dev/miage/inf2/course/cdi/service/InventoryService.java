@@ -7,6 +7,8 @@ public interface InventoryService<T> {
 
     T takeFromInventory();
 
+    T takeFromInventory(String id);
+
     long countItemsInInventory();
 
     Collection<T> listAllItems();
