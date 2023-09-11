@@ -1,0 +1,36 @@
+{
+  "id": "a5f90d95-662b-436f-9b70-5c14c7b0ea63",
+  "tourFile": "cDI-05:Observers.tour",
+  "title": "CDI-05: Observers",
+  "description": "A New Tour",
+  "steps": [
+    {
+      "title": "A Description-Only Step",
+      "description": "On souhaite maintenant prevenir nos clients lorsqu\u0027un nouveau livre arrive en stock.\nPour cela, on va s\u0027abonner à des évènements métiers pour réagir en loggant dans la console"
+    },
+    {
+      "title": "BookShop.java:22",
+      "description": "Nous avons injecté  la classe jakarta.enterprise.event.Event pour pouvoir notifier des évènements",
+      "file": "BookShop.java",
+      "line": 22
+    },
+    {
+      "title": "BookShop.java:55",
+      "description": "Les évènements sont notifiés à chaque ajout de livre",
+      "file": "BookShop.java",
+      "line": 55
+    },
+    {
+      "title": "BookStockLogger.java:8",
+      "description": "Simple Navigation to BookStockLogger.java:8",
+      "file": "BookStockLogger.java",
+      "line": 8
+    },
+    {
+      "title": "BookStockLogger.java:8",
+      "description": "à l\u0027aide de l\u0027annotation `jakarta.enterprise.event.Observes` on peut savoir si un évènement a été déclanché quelque part dans le code\n\nVous pouvez crée un nouveau livre à cette adresse et objserver le log dans la console: http://localhost:8080/book/form-new",
+      "file": "BookStockLogger.java",
+      "line": 8
+    }
+  ]
+}
