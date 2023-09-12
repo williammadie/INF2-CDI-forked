@@ -8,7 +8,6 @@ import dev.miage.inf2.course.cdi.service.InventoryService;
 import dev.miage.inf2.course.cdi.service.ReceiptTransmissionService;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.context.Dependent;
 import jakarta.enterprise.event.Event;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
