@@ -35,11 +35,11 @@ public class CandiesEndpoint {
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance getCandies() { return Templates.candyList(candyShop.getAllItems());}
 
-    @Path("{flavor}")
+    @Path("{id}")
     @GET
     @Produces(MediaType.TEXT_HTML)
-    public TemplateInstance getCandy(@PathParam("flavor") String flavor) {
-        Optional<Candy> candy = candyShop.getAllItems().stream().filter(b -> b.flavor().equals(flavor)).findAny();
+    public TemplateInstance getCandy(@PathParam("id") String id) {
+        Optional<Candy> candy = candyShop.getAllItems().stream().filter(b -> b.id().equals(id)).findAny();
         if (candy.isEmpty()) {
             throw new WebApplicationException(404);
         } else {
@@ -57,8 +57,8 @@ public class CandiesEndpoint {
     @POST
     @Produces(MediaType.TEXT_HTML)
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response newCandy(@FormParam("flavor") String flavor, @FormParam("weight") int weight) throws URISyntaxException {
-        Candy candy = new Candy(flavor, weight);
+    public Response newCandy(@FormParam("flavor") String flavor, @FormParam("weight") int weight, @FormParam("id") String id) throws URISyntaxException {
+        Candy candy = new Candy(flavor, weight, id);
         candyShop.stock(candy);
         return Response.seeOther(new URI("/candy/all")).build();
     }
