@@ -12,9 +12,8 @@
 
 <ul>
     {#for candy in candies}
-        <li>{candy_count}. {candy.flavor} by {candy.weight} <input type="button" value="sell" class="btn btn-primary" id="{candy.id()}"/>
+        <li>{candy_count} - {candy.flavor} - Qté : {candy.weight} kg <input type="button" value="sell" class="btn btn-primary" id="{candy.id()}"/>
         </li>
-
     {/for}
 </ul>
 
@@ -23,11 +22,12 @@
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
 
-</body>t
+</body>
 <script>
     window.addEventListener("load", function () {
         document.querySelectorAll("input.btn").forEach(function (e) {
             e.addEventListener("click", function (ee) {
+                console.log('I have been called');
                 fetch("/candy/" + e.id, { method: "DELETE" }).then((data) => {
                     location.reload();
                 })

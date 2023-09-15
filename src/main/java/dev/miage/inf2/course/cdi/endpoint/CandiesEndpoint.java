@@ -2,6 +2,8 @@ package dev.miage.inf2.course.cdi.endpoint;
 
 import dev.miage.inf2.course.cdi.domain.CandyShop;
 import dev.miage.inf2.course.cdi.model.Candy;
+import dev.miage.inf2.course.cdi.model.Customer;
+import info.schnatterer.mobynamesgenerator.MobyNamesGenerator;
 import io.quarkus.qute.CheckedTemplate;
 import io.quarkus.qute.TemplateInstance;
 import jakarta.enterprise.context.Dependent;
@@ -45,6 +47,14 @@ public class CandiesEndpoint {
         } else {
             return CandiesEndpoint.Templates.candyList(List.of(candy.get()));
         }
+    }
+
+    @Path("{id}")
+    @DELETE
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance buybook(@PathParam("id") String id) {
+        candyShop.sell(new Customer(MobyNamesGenerator.getRandomName(), MobyNamesGenerator.getRandomName(), "toto@miage.dev", "+3395387845"),id);
+        return CandiesEndpoint.Templates.candyList(candyShop.getAllItems());
     }
 
     @Path("form-new")
