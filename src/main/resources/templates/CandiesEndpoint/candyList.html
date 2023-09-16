@@ -12,12 +12,12 @@
 
 <ul>
     {#for candy in candies}
-        <li>{candy_count} - {candy.flavor} - Qté : {candy.weight} kg <input type="button" value="sell" class="btn btn-primary" id="{candy.id()}"/>
+        <li>{candy_count} - ID: {candy.id} | {candy.flavor} - Qté restante : {candy.getWeightInKg()} kg <input type="button" value="sell all (no auto-restock)" class="btn btn-primary" id="{candy.id()}"/>
         </li>
     {/for}
 </ul>
 
-<a href="/candy/form-new">Add a Candy</a> <a href="/candy/all">list all candies</a>
+<a href="/candy/form-new">Add a Candy</a> <a href="/candy/all">list all candies</a> <a href="/candy/form-sell">Sell qty of a Candy</a>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>

@@ -30,6 +30,8 @@ public class CandiesEndpoint {
         public static native TemplateInstance candyList(Collection<Candy> candies);
 
         public static native TemplateInstance formNew();
+
+        public static native TemplateInstance formSell();
     }
 
     @Path("all")
@@ -52,7 +54,7 @@ public class CandiesEndpoint {
     @Path("{id}")
     @DELETE
     @Produces(MediaType.TEXT_HTML)
-    public TemplateInstance buybook(@PathParam("id") String id) {
+    public TemplateInstance buycandy(@PathParam("id") String id) {
         candyShop.sell(new Customer(MobyNamesGenerator.getRandomName(), MobyNamesGenerator.getRandomName(), "toto@miage.dev", "+3395387845"),id);
         return CandiesEndpoint.Templates.candyList(candyShop.getAllItems());
     }
@@ -64,6 +66,13 @@ public class CandiesEndpoint {
         return CandiesEndpoint.Templates.formNew();
     }
 
+    @Path("form-sell")
+    @GET
+    @Produces(MediaType.TEXT_HTML)
+    public TemplateInstance sellQtyOfCandyForm() {
+        return CandiesEndpoint.Templates.formSell();
+    }
+
     @POST
     @Produces(MediaType.TEXT_HTML)
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -71,5 +80,18 @@ public class CandiesEndpoint {
         Candy candy = new Candy(flavor, weight, id);
         candyShop.stock(candy);
         return Response.seeOther(new URI("/candy/all")).build();
+    }
+
+    @Path("sell-qty")
+    @POST
+    @Produces(MediaType.TEXT_HTML)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public TemplateInstance buyQtyOfCandy(@FormParam("weight") int weight, @FormParam("id") String id) {
+        candyShop.sell(
+                new Customer(MobyNamesGenerator.getRandomName(), MobyNamesGenerator.getRandomName(), "toto@miage.dev", "+3395387845"),
+                id,
+                weight
+                );
+        return CandiesEndpoint.Templates.candyList(candyShop.getAllItems());
     }
 }

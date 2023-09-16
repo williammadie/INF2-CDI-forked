@@ -8,15 +8,11 @@
           integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
 <body>
-<h1>new Candy</h1>
+<h1>sell qty of Candy</h1>
 
-<form action="/candy" method="POST">
+<form action="/candy/sell-qty" method="POST">
     <div class="form-group">
-        <label for="flavor">Parfum</label>
-        <input type="text" class="form-control" name="flavor" id="flavor" placeholder="Parfum du bonbon">
-    </div>
-    <div class="form-group">
-        <label for="weight">Poids (en g)</label>
+        <label for="weight">Poids à vendre (en g)</label>
         <input type="text" class="form-control" id="weight" name="weight" placeholder="Poids du bonbon">
     </div>
     <div class="form-group">

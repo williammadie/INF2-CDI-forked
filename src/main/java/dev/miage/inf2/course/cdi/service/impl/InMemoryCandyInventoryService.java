@@ -1,11 +1,15 @@
 package dev.miage.inf2.course.cdi.service.impl;
 
 import dev.miage.inf2.course.cdi.exception.OutOfStockException;
+import dev.miage.inf2.course.cdi.exception.UnknownInventoryItemException;
 import dev.miage.inf2.course.cdi.model.Candy;
 import dev.miage.inf2.course.cdi.service.InventoryService;
+import dev.miage.inf2.course.cdi.service.InventoryWithQtyService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
 
+import javax.lang.model.UnknownEntityException;
+import javax.lang.model.element.UnknownElementException;
 import java.util.Collection;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -17,7 +21,7 @@ import java.util.stream.Collectors;
 
 @ApplicationScoped
 @Named("InventoryGoodForCandyStore")
-public class InMemoryCandyInventoryService implements InventoryService<Candy> {
+public class InMemoryCandyInventoryService implements InventoryService<Candy>, InventoryWithQtyService<Candy> {
 
     ConcurrentMap<String, BlockingDeque<Candy>> inventory = new ConcurrentHashMap<>();
 
@@ -58,11 +62,23 @@ public class InMemoryCandyInventoryService implements InventoryService<Candy> {
     }
 
     @Override
-    public Collection<Candy> listAllItems() {
-        return this.inventory.values().stream().flatMap(c -> c.stream()).collect(Collectors.toSet());
+    public Candy decreaseElementQtyInInventory(String id, int qty) {
+        Candy candyToUpdate = this.inventory.get(id).peek();
+
+        if (candyToUpdate == null) {
+            throw new UnknownInventoryItemException(String.format("Candy with id %s does not exist in inventory", id));
+        }
+
+        if (qty > candyToUpdate.weight()) {
+            qty = candyToUpdate.weight();
+        }
+
+        candyToUpdate.setWeight(candyToUpdate.weight() - qty);
+        return candyToUpdate;
     }
 
-    public void deleteBook(String id) {
-        this.inventory.remove(id);
+    @Override
+    public Collection<Candy> listAllItems() {
+        return this.inventory.values().stream().flatMap(c -> c.stream()).collect(Collectors.toSet());
     }
 }
