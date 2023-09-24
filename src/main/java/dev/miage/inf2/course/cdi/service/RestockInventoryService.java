@@ -1,6 +1,6 @@
 package dev.miage.inf2.course.cdi.service;
 
-import dev.miage.inf2.course.cdi.domain.BookShop;
+import dev.miage.inf2.course.cdi.domain.shop.BookShop;
 import dev.miage.inf2.course.cdi.model.Book;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

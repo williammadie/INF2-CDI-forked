@@ -1,5 +1,8 @@
-package dev.miage.inf2.course.cdi.domain;
+package dev.miage.inf2.course.cdi.domain.shop;
 
+import dev.miage.inf2.course.cdi.domain.Shop;
+import dev.miage.inf2.course.cdi.domain.ShopWithQty;
+import dev.miage.inf2.course.cdi.domain.event.CandySoldEvent;
 import dev.miage.inf2.course.cdi.exception.OutOfStockException;
 import dev.miage.inf2.course.cdi.model.Candy;
 import dev.miage.inf2.course.cdi.model.Customer;
@@ -8,7 +11,6 @@ import dev.miage.inf2.course.cdi.service.InventoryWithQtyService;
 import dev.miage.inf2.course.cdi.service.ReceiptTransmissionService;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Event;
-import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
@@ -17,9 +19,6 @@ import java.util.Random;
 
 @ApplicationScoped
 public class CandyShop implements Shop<Candy>, ShopWithQty<Candy> {
-
-    private static final int AUTO_RESTOCK_WEIGHT = 100;
-    private static final int AUTO_RESTOCK_LIMIT = 50;
     @Inject
     Event<CandySoldEvent> event;
 
@@ -47,7 +46,7 @@ public class CandyShop implements Shop<Candy>, ShopWithQty<Candy> {
     @Override
     public Candy sell(Customer customer, String id, int qty) {
         Candy soldCandy = this.inventoryService.decreaseElementQtyInInventory(id, qty);
-        event.fire(new CandySoldEvent(soldCandy, qty));
+        event.fire(new CandySoldEvent(soldCandy, qty, this.inventoryService));
         return soldCandy;
     }
 
@@ -59,19 +58,5 @@ public class CandyShop implements Shop<Candy>, ShopWithQty<Candy> {
     @Override
     public Collection<Candy> getAllItems() {
         return this.inventoryService.listAllItems();
-    }
-
-    public void onCandySold(@Observes CandySoldEvent candySoldEvent) {
-        Candy soldCandy = candySoldEvent.getCandy();
-        if (soldCandy.weight() < AUTO_RESTOCK_LIMIT) {
-            autoRestockCandy(soldCandy);
-        }
-    }
-
-    private void autoRestockCandy(Candy candy) {
-        System.out.println("Candy " + candy.toString() + " has been automatically restocked");
-        this.inventoryService.takeFromInventory(candy.id());
-        int actualWeight = candy.weight();
-        this.inventoryService.addToInventory(new Candy(candy.flavor(), actualWeight + AUTO_RESTOCK_WEIGHT, candy.id()));
     }
 }

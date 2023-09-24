@@ -1,12 +1,11 @@
 package dev.miage.inf2.course.cdi.endpoint;
 
-import dev.miage.inf2.course.cdi.domain.BookShop;
+import dev.miage.inf2.course.cdi.domain.shop.BookShop;
 import dev.miage.inf2.course.cdi.model.Book;
 import dev.miage.inf2.course.cdi.model.Customer;
 import info.schnatterer.mobynamesgenerator.MobyNamesGenerator;
 import io.quarkus.qute.CheckedTemplate;
 import io.quarkus.qute.TemplateInstance;
-import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
@@ -15,8 +14,6 @@ import jakarta.ws.rs.core.Response;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URLEncoder;
-import java.nio.charset.Charset;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -59,7 +56,7 @@ public class BooksEndpoint {
     @DELETE
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance buybook(@PathParam("isbn") String isbn) {
-        bookShop.sell(new Customer(MobyNamesGenerator.getRandomName(), MobyNamesGenerator.getRandomName(), "toto@miage.dev", "+3395387845"),isbn);
+        bookShop.sell(new Customer(MobyNamesGenerator.getRandomName(), MobyNamesGenerator.getRandomName(), "toto@miage.dev", "+3395387845", 10),isbn);
         return Templates.booklist(bookShop.getAllItems());
     }
 

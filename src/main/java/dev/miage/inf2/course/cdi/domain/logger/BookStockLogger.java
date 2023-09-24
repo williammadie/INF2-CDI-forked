@@ -1,5 +1,6 @@
-package dev.miage.inf2.course.cdi.domain;
+package dev.miage.inf2.course.cdi.domain.logger;
 
+import dev.miage.inf2.course.cdi.domain.event.BookCreatedEvent;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Observes;
 

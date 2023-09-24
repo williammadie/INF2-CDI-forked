@@ -1,4 +1,4 @@
-package dev.miage.inf2.course.cdi.domain;
+package dev.miage.inf2.course.cdi.domain.event;
 
 import dev.miage.inf2.course.cdi.model.Book;
 

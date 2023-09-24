@@ -1,5 +1,7 @@
-package dev.miage.inf2.course.cdi.domain;
+package dev.miage.inf2.course.cdi.domain.shop;
 
+import dev.miage.inf2.course.cdi.domain.Shop;
+import dev.miage.inf2.course.cdi.domain.event.BookCreatedEvent;
 import dev.miage.inf2.course.cdi.exception.OutOfStockException;
 import dev.miage.inf2.course.cdi.model.Book;
 import dev.miage.inf2.course.cdi.model.Customer;

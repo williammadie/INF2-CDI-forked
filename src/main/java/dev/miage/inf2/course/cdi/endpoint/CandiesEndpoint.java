@@ -1,6 +1,6 @@
 package dev.miage.inf2.course.cdi.endpoint;
 
-import dev.miage.inf2.course.cdi.domain.CandyShop;
+import dev.miage.inf2.course.cdi.domain.shop.CandyShop;
 import dev.miage.inf2.course.cdi.model.Candy;
 import dev.miage.inf2.course.cdi.model.Customer;
 import info.schnatterer.mobynamesgenerator.MobyNamesGenerator;
@@ -55,7 +55,7 @@ public class CandiesEndpoint {
     @DELETE
     @Produces(MediaType.TEXT_HTML)
     public TemplateInstance buycandy(@PathParam("id") String id) {
-        candyShop.sell(new Customer(MobyNamesGenerator.getRandomName(), MobyNamesGenerator.getRandomName(), "toto@miage.dev", "+3395387845"),id);
+        candyShop.sell(new Customer(MobyNamesGenerator.getRandomName(), MobyNamesGenerator.getRandomName(), "toto@miage.dev", "+3395387845", 2),id);
         return CandiesEndpoint.Templates.candyList(candyShop.getAllItems());
     }
 
@@ -88,7 +88,7 @@ public class CandiesEndpoint {
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public TemplateInstance buyQtyOfCandy(@FormParam("weight") int weight, @FormParam("id") String id) {
         candyShop.sell(
-                new Customer(MobyNamesGenerator.getRandomName(), MobyNamesGenerator.getRandomName(), "toto@miage.dev", "+3395387845"),
+                new Customer(MobyNamesGenerator.getRandomName(), MobyNamesGenerator.getRandomName(), "toto@miage.dev", "+3395387845", 2),
                 id,
                 weight
                 );

@@ -1,17 +1,15 @@
-package dev.miage.inf2.course.cdi.service;
+package dev.miage.inf2.course.cdi.service.decorator;
 
-import dev.miage.inf2.course.cdi.domain.BookShop;
+import dev.miage.inf2.course.cdi.domain.shop.BookShop;
 import dev.miage.inf2.course.cdi.exception.OutOfStockException;
 import dev.miage.inf2.course.cdi.model.Book;
 import dev.miage.inf2.course.cdi.model.Customer;
-import dev.miage.inf2.course.cdi.model.Receipt;
+import dev.miage.inf2.course.cdi.service.RestockInventoryService;
 import jakarta.annotation.Priority;
 import jakarta.decorator.Decorator;
 import jakarta.decorator.Delegate;
 import jakarta.enterprise.inject.Any;
 import jakarta.inject.Inject;
-
-import java.util.Random;
 
 @Priority(1)
 @Decorator

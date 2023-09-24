@@ -1,18 +1,12 @@
 package dev.miage.inf2.course.cdi.domain;
 
-import dev.miage.inf2.course.cdi.domain.BookShop;
-import dev.miage.inf2.course.cdi.domain.Shop;
+import dev.miage.inf2.course.cdi.domain.shop.BookShop;
 import dev.miage.inf2.course.cdi.exception.OutOfStockException;
 import dev.miage.inf2.course.cdi.model.Book;
 import dev.miage.inf2.course.cdi.model.Customer;
-import dev.miage.inf2.course.cdi.service.InventoryService;
-import dev.miage.inf2.course.cdi.service.ReceiptTransmissionService;
 import info.schnatterer.mobynamesgenerator.MobyNamesGenerator;
 import io.quarkus.test.junit.QuarkusTest;
-import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
-import jakarta.inject.Named;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -32,7 +26,7 @@ class BookShopTest {
 
     @BeforeEach
     private void setup() {
-        customer = new Customer(MobyNamesGenerator.getRandomName(), MobyNamesGenerator.getRandomName(), "toto@miage.dev", "+333895457896");
+        customer = new Customer(MobyNamesGenerator.getRandomName(), MobyNamesGenerator.getRandomName(), "toto@miage.dev", "+333895457896", 10);
     }
 
     @Inject
